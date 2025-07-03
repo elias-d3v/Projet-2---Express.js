@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h1= furniture.name
+  p Catégorie : #{furniture.category ? furniture.category.name : '—'}
+  h4.mt-4 Matériaux
+  if furniture.material.length
+    ul
+      each m in furniture.material
+        li
+          a(href=`/material/${m.material._id}`)= m.material.name
+          |  – quantité : #{m.quantity}
+  else
+    p.text-muted Aucun matériau.
+  a.btn.btn-outline-secondary.mt-4(href='/furnitures') ← Retour

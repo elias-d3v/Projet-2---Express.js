@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  h1 Matériaux disponibles
+  table.table.table-bordered
+    thead
+      tr
+        th Nom
+        th Type
+        th Fournisseur
+        th Actions
+    tbody
+      each mat in materials
+        tr
+          td= mat.name
+          td= mat.type
+          td= mat.supplier.name
+          td
+            a.btn.btn-sm.btn-primary(href=`/material/${mat._id}`) Voir

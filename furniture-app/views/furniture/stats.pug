@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+  h1 Statistiques
+
+  h3 Meubles par catégorie
+  canvas#categoryChart(width='400', height='200')
+
+  h3.mt-5 Quantité totale de chaque matière utilisée
+  canvas#materialChart(width='400', height='200')
+
+  script(src="https://cdn.jsdelivr.net/npm/chart.js")
+
+  script.
+    const categoryData = !{JSON.stringify(categoryCount)};
+    const materialData = !{JSON.stringify(materialTotals)};
+
+    const catCtx = document.getElementById('categoryChart').getContext('2d');
+    new Chart(catCtx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(categoryData),
+        datasets: [{
+          label: 'Nombre de meubles',
+          data: Object.values(categoryData),
+          borderWidth: 1
+        }]
+      }
+    });
+
+    const matCtx = document.getElementById('materialChart').getContext('2d');
+    new Chart(matCtx, {
+      type: 'pie',
+      data: {
+        labels: Object.keys(materialData),
+        datasets: [{
+          label: 'Quantité totale',
+          data: Object.values(materialData)
+        }]
+      }
+    });

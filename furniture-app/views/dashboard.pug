@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1.mb-4 Tableau de bord
+  canvas#chart1(style="max-height:300px")
+
+block scripts
+  script(src="https://cdn.jsdelivr.net/npm/chart.js")
+  script.
+    fetch('/api/stats')
+      .then(r => r.json())
+      .then(data => buildCharts(data));
+
+    function buildCharts(data) {
+      console.log("📊 reçu :", data); // ← vérifie dans la console
+      const ctx = document.getElementById('chart1');
+      new Chart(ctx, { type: 'bar', data });
+    }

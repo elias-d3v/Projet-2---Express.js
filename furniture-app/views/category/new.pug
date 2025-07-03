@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+  h1 Nouvelle catégorie
+  form(action="/categories/new" method="POST")
+    .mb-3
+      label.form-label(for="name") Nom de la catégorie
+      input.form-control(type="text" name="name" required)
+    button.btn.btn-primary(type="submit") Ajouter

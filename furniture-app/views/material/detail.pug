@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h1= material.name
+  p Type : #{material.type}
+  p Fournisseur : #{material.supplier.name}
+
+  if material.keywords.length
+    h4.mt-4 Mots-clés
+    each kw in material.keywords
+      span.badge.bg-secondary.me-1= kw
+
+  h3.mt-5 Meubles utilisant ce matériau
+  if furnitures.length
+    ul
+      each f in furnitures
+        li
+          a(href=`/furnitures/${f._id}`)= f.name
+          |  – #{f.category.name}
+  else
+    p.text-muted Aucun meuble n’utilise ce matériau.
+
+  a.btn.btn-outline-secondary.mt-4(href='/material') ← Retour

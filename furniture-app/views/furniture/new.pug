@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h1 Nouveau meuble
+  form(method="POST", action="/furnitures/new")
+    .mb-3
+      label.form-label(for="name") Nom
+      input.form-control(type="text", name="name", required)
+
+    .mb-3
+      label.form-label(for="category") Catégorie
+      select.form-select(name="category", required)
+        each cat in categories
+          option(value=cat._id)= cat.name
+
+    h4.mt-4 Matériaux
+    each m, i in material
+      .form-check
+        input.form-check-input(type="checkbox", name="matIds", value=m._id, id=`mat${i}`)
+        label.form-check-label(for=`mat${i}`)= m.name
+        input.form-control.mt-1(type="number", name="quantities", placeholder="Quantité", min="1")
+
+    button.btn.btn-primary.mt-3(type="submit") Ajouter

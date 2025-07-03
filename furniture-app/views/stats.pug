@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1 Statistiques
+
+  h2 Meubles par catégorie
+  canvas#categoryChart(width="400" height="200")
+
+  h2 Quantité totale par matière
+  canvas#materialChart(width="400" height="200")
+
+  script(src="https://cdn.jsdelivr.net/npm/chart.js")
+  script.
+    const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+    new Chart(categoryCtx, {
+      type: 'bar',
+      data: !{chartCategoryData}
+    });
+
+    const materialCtx = document.getElementById('materialChart').getContext('2d');
+    new Chart(materialCtx, {
+      type: 'pie',
+      data: !{chartMaterialData}
+    });

@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  h1 Liste des meubles
+  a.btn.btn-success.mb-3(href='/furnitures/new') + Nouveau meuble
+  table.table.table-striped
+    thead
+      tr
+        th Nom
+        th Catégorie
+        th Matières
+    tbody
+      each f in furnitures
+        tr
+          td
+            a(href=`/furnitures/${f._id}`)= f.name
+          td
+            = f.category ? f.category.name : '—'
+          td
+            if f.material.length
+              each m in f.material
+                if m.material
+                  span.badge.bg-secondary.me-1
+                    a.text-white(href=`/material/${m.material._id}`)= m.material.name
+            else
+              | Aucune matière
