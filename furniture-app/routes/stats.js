@@ -8,7 +8,6 @@ const auth = require('../middleware/auth');
 router.get('/', auth, async (req, res) => {
   const furnitures = await Furniture.find().populate('category').populate('material.material');
 
-  // 📊 Meubles par catégorie
   const categoryCount = {};
   furnitures.forEach(f => {
     const catName = f.category ? f.category.name : 'Non catégorisé';
@@ -23,7 +22,6 @@ router.get('/', auth, async (req, res) => {
     }]
   };
 
-  // 🧱 Quantité de matières utilisées
   const materialQuantities = {};
   furnitures.forEach(f => {
     f.material.forEach(m => {
@@ -43,7 +41,6 @@ router.get('/', auth, async (req, res) => {
     }]
   };
 
-  // 🔁 Render
   res.render('stats', {
     chartCategoryData: JSON.stringify(chartCategoryData),
     chartMaterialData: JSON.stringify(chartMaterialData)

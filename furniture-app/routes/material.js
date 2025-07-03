@@ -15,7 +15,6 @@ router.get('/:id', async (req, res) => {
     const material = await Material.findById(req.params.id)
                                    .populate('supplier');
 
-    // ⚠️     ────▼ change ici : 'material.material'
     const furnitures = await Furniture.find({ 'material.material': material._id })
                                       .populate('category');
 

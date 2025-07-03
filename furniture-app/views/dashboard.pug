@@ -12,7 +12,6 @@ block scripts
       .then(data => buildCharts(data));
 
     function buildCharts(data) {
-      console.log("📊 reçu :", data); // ← vérifie dans la console
       const ctx = document.getElementById('chart1');
       new Chart(ctx, { type: 'bar', data });
     }
